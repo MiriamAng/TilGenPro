@@ -118,8 +118,6 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --wsiList wsi1.mrxs wsi2.mrxs
 ````
 
-
-
 ## GUI
 
 ## Licence

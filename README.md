@@ -20,7 +20,7 @@ TiGenPro has been implemented and tested to run on a remote server based on Ubun
 
 To get started, clone the GitHub repository through the command:
 ``` bash
-git clone https://github.com/MiriamAng/deepLearningSubtypesPredictionUTUC.git
+git clone https://github.com/MiriamAng/TilGenPro.git
 ````
 
 We suggest to run the pipeline in a dedicated conda environment. This can be built through the provided yml file as follows:

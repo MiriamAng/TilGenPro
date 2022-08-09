@@ -10,7 +10,7 @@ TilGenPro is an automated Python-based pipeline that, starting from a QuPath pro
 More detailed information on how the quality-filtering step is implemented can be found in our manuscript ***Angeloni M., ...., Ferrazzi F., Bahlinger V. in preparation***.
 
 ## Software requirements and setup
-TiGenPro has been implemented and tested to run on a remote server based on Ubuntu's 20.04.4 long-term support (LTS) operating system using QuPath v.0.2.3 and Python v.3.7.12. In order to be run, the following packages are required by the pipeline:
+TiGenPro has been implemented and tested to run on a remote server based on Ubuntu's 20.04.4 long-term support (LTS) operating system using QuPath v.0.2.3 and Python v.3.7.12. In order to be run, the following packages are required:
 
 + qupath [(from the svillal channel)](https://github.com/bayer-science-for-a-better-life/qupath-feedstock)
 + python
@@ -29,7 +29,7 @@ git clone https://github.com/MiriamAng/TilGenPro.git
 We suggest to run the pipeline in a dedicated conda environment. This can be built through the provided yml file as follows:
 ``` bash
 # Crete the conda environment tilGenProEnv
-conda env create -f /path/to/envFile.yml
+conda env create -f /path/to/TilGenPro/envFile.yml
 
 # Activate the conda environment
 conda activate tilGenProEnv
@@ -63,7 +63,7 @@ By default, two new folders will be created in the same directory as the QuPath 
      + *infoWSIs.csv*: stores information on the number of tiles generated for a given WSI (column 'numTilesInit') and of the tiles kept after the quality-filtering step (column 'numTilesAfterPreproc') stores all the tiles (jpeg format) that did not pass the qualily-filtering step.
 
 ## Customized configuration settings
-The pipeline allows also to provide in input additional arguments according to user-specific requirements. 
+The pipeline also allows for optional arguments according to user-specific requirements. 
 
 | Optional Argument | Default Value | Description |
 | --- | --- | --- |
@@ -81,6 +81,7 @@ The help documentation is easly accessible through the following command:
 python tilesPreprocessing.py --help
 ````
 Notably, in case there is the need to process only a subset of the WSIs belonging to the QuPath project, these can be provided in input in two different ways:
+
 1) by providing through the optional argument *--wsiDir* the absolute path to a folder containing a file called *slidesToProcess.csv* built by the user. 
 **NOTE!** The file **has to** be called slidesToProcess.csv. It can contain as many column as wanted but it **must** contain at least a column called 'Slide' where are stored, in each row, the full names (e.g. wsi_name.mrxs) of the WSIs to process.
 
@@ -115,7 +116,7 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 | ... | ... | ... | ... | ... | ... |
 | ... | ... | ... | ... | ... | wsiN.mrxs |
 
-2) by specifying WSI(s) full name (e.g. wsi_name.mrxs) through the optional argument *--wsiList*. If two or more WSIs are provided in input, their full names need to be separated by a space. 
+2) by specifying WSI(s) full name(s) (e.g. wsi_name.mrxs) through the optional argument *--wsiList*. If two or more WSIs are provided in input, their full names need to be separated by a space. 
 **NOTE!** We recommand using the optional argument --wsiList only in case of a limited number of WSIs to process (e.g. 5)
 ``` bash
 python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --wsiList wsi1.mrxs wsi2.mrxs

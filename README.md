@@ -38,7 +38,7 @@ Once the GitHub repository has been cloned, the easiest way to run the pipeline 
 2) to run the script **tilesPreprocessing.py** by specifying the absolute path to the QuPath project file
 ``` bash
 # Navigate to the directory containing the script tilesPreprocessing.py
-cd path/to/TilGenProPipeline/src
+cd path/to/TilGenPro/src
 
 # Run the script tilesPreprocessing.py
 python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj
@@ -64,8 +64,8 @@ The pipeline allows also to provide in input additional arguments according to u
 
 | Optional Argument | Default Value | Description |
 | --- | --- | --- |
-| --groovyScript | ./TilGenProPipeline/src/generateTiles.groovy | absolute path to the groovy script (.groovy) used for tiles generation |
-| --shellScript | ./TilGenProPipeline/src/runQupath.sh |  absolute path to the shell script (.sh) script used to run QuPath from terminal |
+| --groovyScript | ./TilGenPro/src/generateTiles.groovy | absolute path to the groovy script (.groovy) used for tiles generation |
+| --shellScript | ./TilGenPro/src/runQupath.sh |  absolute path to the shell script (.sh) script used to run QuPath from terminal |
 | --tilesDir  | QuPath project directory | absolute path to the directory where the tiles generated will be stored |
 | --outputDir | QuPath project directory |  absolute path to the directory where the results from pre-processing will be stored |
 | --wsiDir | None | absolute path to the folder containing the dataframe storing information on the WSIs to process |

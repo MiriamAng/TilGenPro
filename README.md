@@ -123,6 +123,26 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 ````
 
 ## GUI
+A Graphical User Interface (GUI) has been developed for both Windows and Linux operating systems and does not require any packages to be pre-installed. 
+### Windows operating system
+1) Download the gui.exe file
+2) Open the file by double clicking on the GUI icon
+
+### Linux operating system
+1) Download the gui.tar.xz file and navigate to the directory where the file was dowloaded
+2) Unzip the compressed tar archive as follows:
+``` bash
+tar -xf gui.tar.xz
+````
+3) Open the file either:
+    - by typing ```gui ``` in the command line
+    - or by double clicking on the GUI icon
+*Optional*: if you want to add the GUI to the global namespace of your command line (and being able to open it without navigating in the directory were the file was downloaded) use he following command:
+``` bash
+sudo cp ./gui ./usr/local/bin/name_you_want_to_call_the_gui
+````
+### Usage
+
 
 ## Licence
 The License file applies to all files within this repository. Whenever functions from third parties were used, their own license was included in the script.

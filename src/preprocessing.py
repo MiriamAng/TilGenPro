@@ -125,7 +125,7 @@ def extractInfo(tilesDir, preprocessingResDir, resDir, wsiDir):
         df['numTilesAfterPreproc'] = ""
         for rowIdx in range(len(df)):
             wsiName = df.loc[rowIdx, 'Slide']
-            newWsiName = wsiName.replace(" ", "").strip(".mrxs")
+            newWsiName = os.path.splitext(wsiName)[0].replace(" ", "")
             df['Slide'].replace(to_replace = wsiName, value = newWsiName, inplace = True)
         
     for rowIdx in range(len(df)):
@@ -357,11 +357,8 @@ class pipeline:
             # The first thing to do is generating tiles. For each WSI belonging to the input wsiList, tiles generation is handled by the function 
             # tilesGenerator and a message is printed in output as soon all tiles belonging to the WSI have been generated.
             for i in self.wsiList:
-                # Extract image file extension
-                fileFormat = os.path.splitext(i)[1]
                 # Remove file extension as well as all possible white spaces from the WSI name
-                file = (i).strip(fileFormat)
-                file = file.replace(" ", "")
+                file = os.path.splitext(i)[0].replace(" ", "")
                 print('\n\n'     "---------------------------------------------------------------------------------------------------------------------------------------------------------------")
                 print('\n' f'************ Slide being processed: {file} ************')
                 print('\n' f'Tiles generation for {file} has been started.')

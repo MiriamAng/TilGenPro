@@ -1,7 +1,7 @@
 import groovy.time.*
 
 // Create a log file inside the results directory to store information, for each processed image, of the time took to generate tiles.
-File logfile = new File('/research/storage-normal/AI_Patho/Angeloni/01_ihcSubtypesPredictionUTUC/finalVersion_paper/tilesPreproc', 'logfile.log')
+File logfile = new File('/research/storage-normal/AI_Patho/Angeloni/testTilGenPro/annotations/QuPathProj_server/results', 'logfile.log')
 
 def timeStart = new Date()
 
@@ -32,7 +32,7 @@ def name = GeneralTools.getNameWithoutExtension(ImageData.getServer().getMetadat
 name_n = name.replaceAll("\\s","")
 
 // The file path were to store the generated tiles will be dinamically created basing on the user.
-def pathOutput = buildFilePath('/research/storage-normal/AI_Patho/Angeloni/01_ihcSubtypesPredictionUTUC/finalVersion_paper/tiles', name_n)
+def pathOutput = buildFilePath('/research/storage-normal/AI_Patho/Angeloni/testTilGenPro/annotations/QuPathProj_server/tiles', name_n)
 mkdirs(pathOutput)
 
 

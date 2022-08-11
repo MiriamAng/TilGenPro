@@ -71,6 +71,7 @@ The pipeline also allows for optional arguments according to user-specific requi
 | --tilesDir  | QuPath project directory | absolute path to the directory where the tiles generated will be stored |
 | --outputDir | QuPath project directory |  absolute path to the directory where the results from pre-processing will be stored |
 | --wsiDir | None | absolute path to the folder containing the dataframe storing information on the WSIs to process |
+| --jpgNormTiles | False | Save the normalized tiles in JPG other than as a pickle file |
 | --wsiList | None | list of the full name(s) of the WSIs to process |
 | --lowerPerc | 10 | percentile correspondent to the dark threshold on the log10-transformed median intesity pixel values distribution for a given WSI |
 | --upperPerc | 90 | percentile correspondent to the white threshold on the log10-transformed median intesity pixel values distribution for a given WSI |  
@@ -121,6 +122,7 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 ``` bash
 python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --wsiList wsi1.mrxs wsi2.mrxs
 ````
+Finally, if the optional argument *--jpgNormTiles* is provided, all the normalized tiles belonging to a given WSI will be saved in JPG under the same folder path containing the normalization results.  
 
 ## GUI
 A Graphical User Interface (GUI), one for Windows and the other one for Linux operating systems, has been developed and does not require any packages to be pre-installed. The download file can be found under [...]

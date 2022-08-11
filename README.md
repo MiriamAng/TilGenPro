@@ -117,7 +117,8 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 | ... | ... | ... | ... | ... | wsiN.mrxs |
 
 2) by specifying WSI(s) full name(s) (e.g. wsi_name.mrxs) through the optional argument *--wsiList*. If two or more WSIs are provided in input, their full names need to be separated by a space. 
-**NOTE!** We recommand using the optional argument --wsiList only in case of a limited number of WSIs to process (e.g. 5)
+
+**NOTE!** We recommend using the optional argument --wsiList only in case of a limited number of WSIs to process (e.g. 5)
 ``` bash
 python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --wsiList wsi1.mrxs wsi2.mrxs
 ````

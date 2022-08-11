@@ -17,7 +17,6 @@ TiGenPro has been implemented and tested to run on a remote server based on Ubun
 + numpy
 + pandas
 + matplotlib
-+ open-cv
 + pillow
 + tqdm
 

@@ -34,13 +34,13 @@ def create_parser():
 
     parser.add_argument('--wsiDir', nargs = '?', default = None, type = str, dest = "WSIs_DIR", help = 'Absolute path to the folder containing the dataframe storing information on the WSIs to process')
 
+    parser.add_argument('--jpgNormTiles', action = 'store_true', dest = 'JPG_NORM_TILES', help = 'Save the normalized tiles in JPG other than as a pickle file')
+    
     parser.add_argument('--wsiList', nargs = '+', default = None, type = str, dest = "WSIs_LIST", help = 'Name of the WSIs to process')
 
     parser.add_argument('--lowerPerc', nargs = '?', default = 10, type = int, dest = "LOWER_PERCENTILE", help = 'Lower percentile for tiles filtering')
 
     parser.add_argument('--upperPerc', nargs = '?', default = 90, type = int, dest = "UPPER_PERCENTILE", help = 'Upper percentile for tiles filtering')
-    
-    parser.add_argument('--jpgNormTiles', action = 'store_true', dest = 'JPG_NORM_TILES', help = 'Save the normalized tiles in JPG other than as a pickle file')
     
     return parser
 

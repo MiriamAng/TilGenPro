@@ -40,6 +40,8 @@ def create_parser():
 
     parser.add_argument('--upperPerc', nargs = '?', default = 90, type = int, dest = "UPPER_PERCENTILE", help = 'Upper percentile for tiles filtering')
     
+    parser.add_argument('--jpgNormTiles', action = 'store_true', dest = 'JPG_NORM_TILES', help = 'Save the normalized tiles in JPG other than as a pickle file')
+    
     return parser
 
 # Parse arguments
@@ -122,6 +124,6 @@ if not check_outputDir:
 else:
 	print('\n\n' f"Results from tiles pre-processing will be stored under: {args.OUTPUT_DIR}")
 
-tilesPreprocessing = pipeline(args.QUPATH_PROJ, args.GROOVY_SCRIPT_DIR, args.SHELL_SCRIPT_DIR, args.TILES_DIR, args.OUTPUT_DIR, args.WSIs_DIR, wsiList = wsiList, lowerPerc = args.LOWER_PERCENTILE, upperPerc = args.UPPER_PERCENTILE)
+tilesPreprocessing = pipeline(args.QUPATH_PROJ, args.GROOVY_SCRIPT_DIR, args.SHELL_SCRIPT_DIR, args.TILES_DIR, args.OUTPUT_DIR, args.WSIs_DIR, jpgNormTiles = args.JPG_NORM_TILES, wsiList = wsiList, lowerPerc = args.LOWER_PERCENTILE, upperPerc = args.UPPER_PERCENTILE)
 
 tilesPreprocessing.initialize()

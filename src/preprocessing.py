@@ -12,7 +12,6 @@ Created on Thu Oct 14 17:56:50 2021
 @author: angelomm
 """
 
-import cv2 as cv
 import logging
 import matplotlib.pyplot as plt
 import numpy as np 
@@ -82,7 +81,7 @@ def calculateIntensity(tilesPath, lowerPerc=10, upperPerc=90):
     
     # Store in a list all the median intensity values associated with each tile belonging to a given WSI
     tiles = readFiles(tilesPath)
-    medianIntensities = [np.median(cv.imread(os.path.join(tilesPath, filename))) for filename in tiles]
+    medianIntensities = [np.median(Image.open(os.path.join(tilesPath, filename))) for filename in tiles]
     logMedianIntensities = np.log10(np.array(medianIntensities))
     darkTh = np.percentile(logMedianIntensities, lowerPerc, interpolation = 'midpoint')
     whiteTh = np.percentile(logMedianIntensities, upperPerc, interpolation = 'midpoint')
@@ -246,8 +245,8 @@ def macenkoNorm(img, Io=240, alpha=1, beta=0.15):
     # Recreate the image 
     Inorm = np.multiply(Io, np.exp(-HERef.dot(C2)))
     Inorm[Inorm > 255] = 254
-    Inorm = np.reshape(Inorm.T, (h, w, 3)).astype(np.uint8) 
-   
+    Inorm = np.reshape(Inorm.T, (h, w, 3)).astype(np.uint8)
+        
     return Inorm
 
 class pipeline:
@@ -256,7 +255,7 @@ class pipeline:
     Pipeline for running tiles generation and pre-processing for each WSI provided in input.
     '''
 
-    def __init__(self, qupathProj, groovyScript, shellScript, tilesDir, resultsDir, wsiDir, wsiList=None, lowerPerc=10, upperPerc=90):
+    def __init__(self, qupathProj, groovyScript, shellScript, tilesDir, resultsDir, wsiDir, jpgNormTiles, wsiList=None, lowerPerc=10, upperPerc=90):
         
         self.qupathProj = qupathProj 
         self.groovyScript = groovyScript
@@ -264,16 +263,24 @@ class pipeline:
         self.tilesDir = tilesDir
         self.resultsDir = resultsDir
         self.wsiDir = wsiDir
+        self.jpgNormTiles = jpgNormTiles
         self.wsiList = wsiList
         self.lowerPerc = lowerPerc
         self.upperPerc = upperPerc
             
     @staticmethod
-    def saveRes(tilesDir, preprocessingResDir, file, t, g, lowerPerc=10, upperPerc=90):
+    def saveRes(tilesDir, preprocessingResDir, file, t, g, jpgNormTiles, lowerPerc=10, upperPerc=90):
     
         os.makedirs(f"{preprocessingResDir}/normTiles/{file}", exist_ok=True)
         os.makedirs(f"{preprocessingResDir}/discTiles/{file}", exist_ok=True)
         normTilesFolder = f"{preprocessingResDir}/normTiles/{file}"
+        
+        if jpgNormTiles == True:
+            os.makedirs(os.path.join(normTilesFolder, "jpgNormTiles"),exist_ok=True)
+            jpgNormTilesFolder = os.path.join(normTilesFolder, "jpgNormTiles")
+        else:
+            jpgNormTilesFolder = None
+        
         tilesDiscardedFolder = f"{preprocessingResDir}/discTiles/{file}"
         wsiTilesDir = os.path.join(tilesDir, file)
         tiles = readFiles(wsiTilesDir)
@@ -315,10 +322,16 @@ class pipeline:
                       g[i] = macenkoNorm(path)
                 except Exception as e:
                       logger.debug(f"Tile {i} had problems during the Macenko normalization", exc_info=True)
+                      
+                if jpgNormTilesFolder != None:
+                    normImg = Image.fromarray(g[i])
+                    normImg.save(os.path.join(jpgNormTilesFolder, f"norm_{i}"))
+                else:
+                    pass
             else:
                 logger.info(f"Tile {i} was excluded from further pre-processing due to thresholding")
-                imgDiscarded = cv.imread(os.path.join(wsiTilesDir, i), 1)
-                cv.imwrite(os.path.join(tilesDiscardedFolder, i), imgDiscarded)
+                imgDiscarded = Image.open(os.path.join(wsiTilesDir, i))
+                imgDiscarded.save(os.path.join(tilesDiscardedFolder, i))
         
         logger.info("********** End of the pre-processing pipeline **********")
         logger.info(f"A total of {len(tiles)-np.count_nonzero(tilesToKeep)} tiles were excluded from further pre-processing")
@@ -373,7 +386,7 @@ class pipeline:
                 # After tiles generation, tiles filtering and normalization is performed.
                 normTilesDict.clear()
                 print('\n' f'Tiles pre-processing for {file} has been started.')
-                self.saveRes(self.tilesDir, preprocessingResDir, file, timeDict, normTilesDict, self.lowerPerc, self.upperPerc)
+                self.saveRes(self.tilesDir, preprocessingResDir, file, timeDict, normTilesDict, self.jpgNormTiles, self.lowerPerc, self.upperPerc)
                 
         # If no list of WSIs is provided in input to the pipeline, the entire QuPath project will be processed.
         else:
@@ -389,14 +402,11 @@ class pipeline:
             print('\n\n'     "--------------------------------------------------------------------- Tiles pre-processing ---------------------------------------------------------------------")
             
             for i in os.listdir(self.tilesDir):
-                # Remove file extension as well as all possible white spaces from the WSI name
-                #file = (i).strip(.mrxs)
-                #file = file.replace(" ", "")
                 
                 normTilesDict.clear()
                 
                 print('\n' f'************ Slide being processed: {i} ************')
-                self.saveRes(self.tilesDir, preprocessingResDir, i, timeDict, normTilesDict, self.lowerPerc, self.upperPerc)
+                self.saveRes(self.tilesDir, preprocessingResDir, i, timeDict, normTilesDict, self.jpgNormTiles, self.lowerPerc, self.upperPerc)
                 
         extractInfo(self.tilesDir, preprocessingResDir, self.resultsDir, self.wsiDir)
                 

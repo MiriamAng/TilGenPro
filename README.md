@@ -83,6 +83,7 @@ python tilesPreprocessing.py --help
 Notably, in case there is the need to process only a subset of the WSIs belonging to the QuPath project, these can be provided in input in two different ways:
 
 1) by providing through the optional argument *--wsiDir* the absolute path to a folder containing a file called *slidesToProcess.csv* built by the user. 
+
 **NOTE!** The file **has to** be called slidesToProcess.csv. It can contain as many column as wanted but it **must** contain at least a column called 'Slide' where are stored, in each row, the full names (e.g. wsi_name.mrxs) of the WSIs to process.
 
 ``` bash

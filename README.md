@@ -125,31 +125,6 @@ python tilesPreprocessing.py path/to/qupath_proj_folder/project_name.qpproj --ws
 ````
 Finally, if the optional argument *--jpgNormTiles* is provided, all the normalized tiles belonging to a given WSI will be saved in JPG under the same folder path containing the normalization results.  
 
-## GUI
-A Graphical User Interface (GUI), one for Windows and the other one for Linux operating systems, has been developed and does not require any packages to be pre-installed. The download file can be found under [...]
-
-### Windows operating system
-1) Download the gui.exe file
-2) Open the file by double clicking on the GUI icon
-
-### Linux operating system
-1) Download the gui.tar.xz file and navigate to the directory where the file was dowloaded
-2) Unzip the compressed tar archive as follows:
-``` bash
-tar -xf gui.tar.xz
-````
-3) Open the file either:
-    - by typing ```gui ``` in the command line
-    - or by double clicking on the GUI icon
-*Optional*: if you want to add the GUI to the global namespace of your command line (and being able to open it without navigating in the directory were the file was downloaded) use he following command:
-``` bash
-sudo cp ./gui ./usr/local/bin/name_you_want_to_call_the_gui
-````
-### Usage
-![Figure 3](figures/Figure3.png)
-
-**Figure 3. GUI appearance in Linux operating system.** The upper part in whites shows the default options provided by the GUI whereas the lower part in grey shows the advanced options made available by ticking the box *Advanced Options*
-
 ## Licence
 The License file applies to all files within this repository. Whenever functions from third parties were used, their own license was included in the script.
 

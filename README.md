@@ -7,7 +7,7 @@ TilGenPro is an automated Python-based pipeline that, starting from a QuPath pro
 
 **Figure 1. Overview of *TilGenPro* workflow.** The annotated tumor area (red) within each slide belonging to the QuPath project (1) is tessellated into smaller tiles (patches) (2). Tiles first undergo a quality-filtering step basing on their log10-transformed median intensity values distribution (3) and afterwards are stain normalized (4).
 
-More detailed information on how the quality-filtering step is implemented can be found in our pre-print manuscript ***[(here)](https://www.medrxiv.org/content/10.1101/2023.06.14.23291350v1)***.
+More detailed information on how the quality-filtering step is implemented can be found in the pre-print version of our manuscript **[(here)](https://www.medrxiv.org/content/10.1101/2023.06.14.23291350v1)**.
 
 ## Software requirements and setup
 TiGenPro has been implemented and tested to run on a remote server based on Ubuntu's 20.04.4 long-term support (LTS) operating system using QuPath v.0.2.3 and Python v.3.7.12. In order to be run, the following packages are required:
